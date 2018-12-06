@@ -23,8 +23,8 @@ public class ProdutoController {
     ProdutoServiceIMPL produtoService;
 
     @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody Produto produto){
-        return new ResponseEntity<>(produtoService.salvar(produto), HttpStatus.OK);
+    public ResponseEntity salvar(@RequestBody Produto produto){
+        return new ResponseEntity(produtoService.salvar(produto), HttpStatus.OK);
     }
 
     @GetMapping("{idProduto}")
@@ -35,7 +35,7 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<Produto> listar(){
-        return new ResponseEntity(produtoService.listar(), HttpStatus.OK);
+        return new ResponseEntity(new ResponseSuccess("Listando produtos", 200, produtoService.listar()), HttpStatus.OK);
     }
 
     @DeleteMapping("{idProduto}")

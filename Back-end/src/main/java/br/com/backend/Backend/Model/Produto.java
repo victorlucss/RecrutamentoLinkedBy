@@ -1,11 +1,16 @@
 package br.com.backend.Backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Produto {
 
     @Id
@@ -13,10 +18,12 @@ public class Produto {
     private Long id_produto;
 
     private String nome;
+
     private String descricao;
+
     private String imagem;
+
     private Double preco;
-    private boolean disponivel;
 
     public Produto() {
     }
@@ -26,7 +33,10 @@ public class Produto {
         this.descricao = descricao;
         this.imagem = imagem;
         this.preco = preco;
-        this.disponivel = true;
+    }
+
+    public Produto(Long id_produto){
+        this.id_produto = id_produto;
     }
 
     public Long getId_produto() {
@@ -67,13 +77,5 @@ public class Produto {
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
     }
 }

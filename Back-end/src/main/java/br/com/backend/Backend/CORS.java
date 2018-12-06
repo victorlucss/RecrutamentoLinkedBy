@@ -1,4 +1,4 @@
-package br.com.backend.Backend.CORS;
+package br.com.backend.Backend;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class Cors implements Filter {
+public class CORS implements Filter {
 
     private String allowOrigin = "*"; // TODO: Mudar quando o site estiver publicado (permitir apenas o IP de origem do Heroku)
 

@@ -1,8 +1,8 @@
 package br.com.backend.Backend.Exception;
 
-public class ProdutoException extends RuntimeException{
+public class EcommerceException extends RuntimeException{
     private int code;
-    public ProdutoException(String exception, int code){
+    public EcommerceException(String exception, int code){
         super(exception);
         this.code = code;
     }

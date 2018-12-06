@@ -4,9 +4,14 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MariaDB53Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   datasource:
-    url: jdbc:mysql://localhost:3306/ecommerce?useSSL=false&useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 1234
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
