@@ -1,0 +1,70 @@
+<div class="logo">
+    MVP-Ecommerce
+</div>
+
+<div class="container">
+    <h2 class="title is-5" *ngIf="vendas.size == 0">Nenhuma venda disponível</h2>
+    <div class="columns">
+        <ng-container *ngFor="let item of vendas | keyvalue">
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img [src]="item.value.produtoOfertado.imagem" alt="Item do carrinho" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="title is-4">{{item.value.produtoOfertado.nome}} <small><a href="#">Ver detalhes</a></small></div>
+                                <h3 class="subtitle is-5">{{trataPreco(item.value.produtoOfertado.preco)}}</h3>
+                                <h4 class="subtitle is-6">{{item.value.quantidade}} {{(item.value.quantidade > 1) ? 'itens no estoque' : 'item no estoque'}}</h4>
+
+                                <button
+                                    type="button"
+                                    class="button is-fullwidth is-success"
+                                    [disabled]="estaNoCarrinho(item.value.produtoOfertado.id_produto)"
+                                    (click)="adicionarCarrinhoPrincipal(item.value.produtoOfertado)">
+                                    {{ (estaNoCarrinho(item.value.produtoOfertado.id_produto)) ? 'Produto no carrinho!' : 'Comprar' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="carrinho" *ngIf="mostrarCarrinho && carrinho.size !== 0">
+    <div class="conteudo-carrinho">
+        <h1 class="title is-3">Carrinho</h1>
+
+        <span class="botao-fechar" (click)="mostrarCarrinho = false">x</span>
+
+        <ul>
+            <li *ngFor="let item of carrinho | keyvalue" class="item">
+                <div class="columns">
+                    <div class="column">
+                        {{item.value.produto.nome}}, {{trataPreco(item.value.produto.preco)}}
+                    </div>
+
+                    <div class="column">
+                        <button type="button" class="button is-small" (click)="removerCarrinho(item.value.produto)">
+                            -
+                        </button>
+                        {{item.value.quantidade}}
+
+                        <button type="button" class="button is-small" (click)="adicionarCarrinho(item.value.produto)">
+                            +
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <h1 class="title is-5">Subtotal: {{trataPreco(valorCarrinho)}}</h1>
+
+        <button class="button is-medium" (click)="gerarCompraFinal()">Finalizar compra</button>
+    </div>
+</div>

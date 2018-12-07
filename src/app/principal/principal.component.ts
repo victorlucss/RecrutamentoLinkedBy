@@ -16,6 +16,7 @@ export class PrincipalComponent implements OnInit {
 	public mostrarCarrinho = false;
 	public vendas: Map<number, Venda> = new Map();
 	public carrinho: Map<number, ItemCarrinho> = new Map();
+	public valorCarrinho: number = 0;
 
 	constructor(private httpService: VendaService) { }
 
@@ -32,6 +33,7 @@ export class PrincipalComponent implements OnInit {
 
 		if(!this.carrinho.has(produto.getId_produto())){
 			this.carrinho.set(produto.getId_produto(), new ItemCarrinho(produto, 1));
+			this.valorCarrinho += produto.preco;
 			this.mostrarCarrinho = true;
 		}else {
 			alert('Este produto já está no carrinho!');
@@ -47,6 +49,7 @@ export class PrincipalComponent implements OnInit {
 				alert('Você já adicionou todos produtos iguais a este disponíveis no estoque!')
 			} else {
 				item_carrinho.setQuantidade(item_carrinho.getQuantidade() + 1);
+				this.valorCarrinho += produto.preco;
 			}
 		}
 	}
@@ -62,6 +65,8 @@ export class PrincipalComponent implements OnInit {
 			} else {
 				this.carrinho.delete(produto.getId_produto());
 			}
+
+			this.valorCarrinho -= produto.preco;
 		} else {
 			alert('Este produto não existe no carrinho!');
 		}
@@ -86,7 +91,7 @@ export class PrincipalComponent implements OnInit {
 		const compraFinal: Compra[] = new Array();
 
 		this.carrinho.forEach((item_carrinho: ItemCarrinho) => {
-			compraFinal.push(new Compra(item_carrinho.getQuantidade(), item_carrinho.getId_produto()));
+			compraFinal.push(new Compra(item_carrinho.getQuantidade(), item_carrinho.getId_produto(), this.vendas.get(item_carrinho.getId_produto()).id_venda ));
 		});
 
 		this.httpService.darBaixa(compraFinal).then(res => {
@@ -108,7 +113,7 @@ export class PrincipalComponent implements OnInit {
 
 	protected limparSessao():void {
 		this.mostrarCarrinho = false;
-		this.carrinho = new Map();
+		this.carrinho.clear();
 		this.getVendas();
 	}
 

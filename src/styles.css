@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
+
+body {
+    background: #eee;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.logo {
+    font-size: 2em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+button {
+    border-radius: 3px;
+}
+
+button.is-success {
+    background: linear-gradient(#1ec365, #19a756);
+}
+
+button.is-success:hover {
+    background: linear-gradient(#1daf5c, #17994f);
+}
+
