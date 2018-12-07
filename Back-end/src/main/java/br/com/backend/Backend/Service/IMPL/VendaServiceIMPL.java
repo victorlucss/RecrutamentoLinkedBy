@@ -67,6 +67,7 @@ public class VendaServiceIMPL implements VendaService {
 
     @Override
     public void deletar(Long id_venda) {
+        this.buscarPorId(id_venda);
         vendaRepository.deletar(id_venda);
     }
 }
