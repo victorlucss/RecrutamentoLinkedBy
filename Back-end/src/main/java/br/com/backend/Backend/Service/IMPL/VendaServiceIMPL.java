@@ -54,6 +54,7 @@ public class VendaServiceIMPL implements VendaService {
     public void darBaixa(int quantidade, Long id_venda) {
         Venda venda = this.buscarPorId(id_venda);
         if(venda.getQuantidade() - quantidade < 0) throw new EcommerceException("Você não pode dar baixa em mais produtos do que existem!", 401);
+        if(venda.getQuantidade() - quantidade == 0) this.deletar(id_venda);
         vendaRepository.darBaixa(venda.getQuantidade() - quantidade, id_venda);
     }
 
@@ -62,5 +63,10 @@ public class VendaServiceIMPL implements VendaService {
         Venda venda = this.buscarPorId(id_venda);
 
         vendaRepository.darAlta(venda.getQuantidade() + quantidade, id_venda);
+    }
+
+    @Override
+    public void deletar(Long id_venda) {
+        vendaRepository.deletar(id_venda);
     }
 }

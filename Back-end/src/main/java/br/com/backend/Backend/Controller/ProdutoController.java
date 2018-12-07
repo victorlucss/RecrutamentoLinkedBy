@@ -27,6 +27,11 @@ public class ProdutoController {
         return new ResponseEntity(produtoService.salvar(produto), HttpStatus.OK);
     }
 
+    @PutMapping("{idProduto}")
+    public ResponseEntity atualizar(@RequestBody Produto produto, @PathVariable("idProduto") Long id_produto){
+        return new ResponseEntity(produtoService.atualizar(produto, id_produto), HttpStatus.OK);
+    }
+
     @GetMapping("{idProduto}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable("idProduto") Long id){
         Produto produto = produtoService.buscarPorId(id);

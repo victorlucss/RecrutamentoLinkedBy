@@ -15,5 +15,7 @@ public interface ProdutoService {
 
     public Produto salvar(Produto produto);
 
+    Produto atualizar(Produto p, Long id_produto);
+
     public void deletar(Long id_produto);
 }

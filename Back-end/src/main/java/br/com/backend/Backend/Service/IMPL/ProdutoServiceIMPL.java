@@ -21,7 +21,7 @@ public class ProdutoServiceIMPL implements ProdutoService {
 
         if(produtos.isEmpty()) throw new EcommerceException("Nenhum produto cadastrado!", 204);
 
-        return produtos;
+    return produtos;
     }
 
     @Override
@@ -50,6 +50,14 @@ public class ProdutoServiceIMPL implements ProdutoService {
         if(this.encontraPorNomeExato(p.getNome()) == null){
             return produtoRepository.save(p);
         }else throw new EcommerceException("Já existe um produto com este nome!", 409);
+
+    }
+
+    @Override
+    public Produto atualizar(Produto p, Long id_produto) {
+        this.buscarPorId(id_produto);
+        p.setId_produto(id_produto);
+        return produtoRepository.save(p);
 
     }
 

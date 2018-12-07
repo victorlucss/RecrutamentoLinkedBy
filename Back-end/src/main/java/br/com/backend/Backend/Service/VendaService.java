@@ -16,4 +16,6 @@ public interface VendaService {
     public void darBaixa(int quantidade, Long id_venda);
 
     public void darAlta(int quantidade, Long id_venda);
+
+    public void deletar(Long id_venda);
 }

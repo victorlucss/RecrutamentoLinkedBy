@@ -38,13 +38,20 @@ public class VendaController {
     public ResponseEntity darBaixa(@RequestBody List<Venda> vendas){
 
         for(Venda venda: vendas){
-            vendaService.darBaixa(venda.getQuantidade(), venda.getProdutoOfertado().getId_produto());
+            vendaService.darBaixa(venda.getQuantidade(), venda.getId_venda());
         }
 
         return new ResponseEntity(new ResponseSuccess("Foi dada baixa", 200), HttpStatus.OK);
 
     }
 
+    @PostMapping("/dar-alta")
+    public ResponseEntity darAlta(@RequestBody Venda venda){
 
+        vendaService.darAlta(venda.getQuantidade(), venda.getId_venda());
+
+        return new ResponseEntity(new ResponseSuccess("Foi dada alta", 200), HttpStatus.OK);
+
+    }
 
 }

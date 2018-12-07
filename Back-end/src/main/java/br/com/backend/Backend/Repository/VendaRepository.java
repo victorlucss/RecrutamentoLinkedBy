@@ -26,4 +26,9 @@ public interface VendaRepository extends JpaRepository<Venda, Long> {
     @Query("SELECT V FROM Venda V WHERE id_produto=:id_produto")
     public Venda buscarPorIdProduto(@Param("id_produto") Long id_produto);
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Venda WHERE id_venda=:id_venda")
+    public void deletar(@Param("id_venda") Long id_venda);
+
 }
